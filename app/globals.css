@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-gold: var(--gold);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+}
+
+:root {
+  /* Flora Garden — sage / cream / warm-gold, lifted straight from the
+     reference preview's oklch tokens, re-grounded in the real brand. */
+  --background: oklch(98.3% 0.008 90);
+  --foreground: oklch(22% 0.015 140);
+  --card: oklch(99.5% 0.005 95);
+  --card-foreground: oklch(22% 0.015 140);
+  --primary: oklch(38% 0.055 145);
+  --primary-foreground: oklch(98.3% 0.008 90);
+  --secondary: oklch(94% 0.018 110);
+  --secondary-foreground: oklch(30% 0.03 145);
+  --accent: oklch(78% 0.06 130);
+  --accent-foreground: oklch(22% 0.015 140);
+  --muted: oklch(94.5% 0.012 100);
+  --muted-foreground: oklch(45% 0.02 130);
+  --border: oklch(90% 0.015 110);
+
+  --gold: oklch(64% 0.09 75);
+  --sage: oklch(38% 0.055 145);
+  --sage-deep: oklch(26% 0.045 150);
+  --cream: oklch(98.3% 0.008 90);
+  --ink: oklch(18% 0.015 140);
+
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Arched image cards: large radius clamps to a dome on the top corners,
+   small radius keeps the base square-ish — matches the reference cards. */
+.arch-card {
+  border-radius: 999px 999px 1.5rem 1.5rem;
+}
+
+/* Decorative leaf glyphs that drift in the hero, matching the reference's
+   floating-leaf accents. */
+.leaf-float {
+  animation: leaf-float 6s ease-in-out infinite;
+}
+.leaf-float-delay {
+  animation: leaf-float 6s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+@keyframes leaf-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(6deg);
+  }
+}
+
+.whatsapp-pulse {
+  animation: whatsapp-pulse 2.6s ease-in-out infinite;
+}
+@keyframes whatsapp-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.25),
+      0 0 0 0 rgba(56, 92, 58, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.25),
+      0 0 0 12px rgba(56, 92, 58, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf-float,
+  .leaf-float-delay,
+  .whatsapp-pulse {
+    animation: none;
+  }
+}
